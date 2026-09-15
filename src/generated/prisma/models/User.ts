@@ -446,6 +446,7 @@ export type UserCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
 
 export interface UserDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+  find(arg0: (user: any) => boolean): User | PromiseLike<User | undefined> | undefined
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
   /**
    * Find zero or one User that matches the filter.
