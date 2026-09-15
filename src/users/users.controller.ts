@@ -12,6 +12,7 @@ import {
 import { UsersService } from './users.service';
 import { Public } from 'src/auth/public.decorator';
 import { CreateUserDto } from './dto/createUserDto';
+import { UpdatedUserDto } from './dto/updatedUserto';
 
 @Controller('users')
 export class UsersController {
@@ -39,16 +40,13 @@ export class UsersController {
     return this.usersService.deleteById(id)
   }
 
-  // @Public()
-  // @HttpCode(HttpStatus.OK)
-  // @Put('users/update:id')
-  // updateUser(
-  //   @Param('id') id: string,
-  //   @Body() UpdatedUserDto: UpdatedUserDto
-  // ) {
-  //   return this.usersService.updateUser(
-  //     id,
-  //     UpdatedUserDto,
-  //   );
-  // }
+  @Public()
+  @HttpCode(HttpStatus.OK)
+  @Put(':id')
+  updateUser
+  (@Param('id') id: string,
+  @Body() updatedUserDto: UpdatedUserDto,
+) {
+    return this.usersService.updateUser(id, updatedUserDto);
+  }
 }

@@ -1,6 +1,7 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/createUserDto';
+import { UpdatedUserDto } from './dto/updatedUserto';
 
 interface User {
   userId: number;
@@ -27,11 +28,7 @@ export class UsersService {
     if (userAlreadyExistis) throw new ConflictException('User already exists!');
 
     const user = await this.prismaService.user.create({
-      data: {
-        email: createUserDto.email,
-        name: createUserDto.name,
-        password: createUserDto.password,
-      },
+      data: createUserDto,
     });
 
     return user;
@@ -59,25 +56,22 @@ export class UsersService {
     return deletedUser;
   }
 
-  // async updateUser(id: string, data: UpdatedUserDto) {
-  //   const user = await this.prismaService.user.findUnique({
-  //     where: {
-  //       id: Number(id),
-  //     },
-  //   });
+  async updateUser(id: string, updatedUserDto: UpdatedUserDto) {
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
 
-  //   if(!user) throw new NotFoundException("User not found");
+    if(!user) throw new NotFoundException("User not found!");
+    const updatedUser = await this.prismaService.user.update({
+      where: {
+        id: Number(id),
+      },
+      data: updatedUserDto,
+    });
 
-  //   const updatedUser = await this.prismaService.user.update({
-  //     where: {
-  //       id: Number(id),
-  //     },
-  //     data: {
-  //       name: data.username,
-  //       email: data.email,
-  //     },
-  //   });
+    return updatedUser;
+  }
 
-  //   return updatedUser;
-  // }
 }
