@@ -49,6 +49,16 @@ export class UsersService {
     });
   }
 
+  async deleteById(id: string) {
+    const deletedUser = this.prismaService.user.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    return deletedUser;
+  }
+
   // async updateUser(id: string, data: UpdatedUserDto) {
   //   const user = await this.prismaService.user.findUnique({
   //     where: {
