@@ -10,13 +10,13 @@ export class AuthService {
   ) {}
 
   async signIn(email: string, pass: string): Promise<{ access_token: string }> {
-    const user = await this.usersService.findOneInMemory(email);
+    const user = await this.usersService.findOne(email);
 
     if (user?.password !== pass) {
       throw new UnauthorizedException('E-mail or password is incorrect!');
     }
 
-    const payload = { sub: user.userId, email: user.email };
+    const payload = { sub: user.id, email: user.email };
 
     let access_token = '';
 

@@ -3,19 +3,18 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/createUserDto';
 import { UpdatedUserDto } from './dto/updatedUserto';
 
-interface User {
-  userId: number;
-  username: string;
-  email: string;
-  password: string;
-}
-
 @Injectable()
 export class UsersService {
   constructor(private prismaService: PrismaService) {}
 
-  async findOneInMemory(email: string): Promise<User | undefined> {
-    return this.prismaService.user.find((user) => user.email === email);
+  async findOne(email: string){
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        email: email,
+      },
+    });
+
+    return user;
   }
 
   async register(createUserDto: CreateUserDto) {
