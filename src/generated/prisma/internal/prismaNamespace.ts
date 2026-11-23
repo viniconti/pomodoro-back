@@ -397,7 +397,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  CycleHistory: 'CycleHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user"
+    modelProps: "user" | "cycleHistory"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -491,6 +492,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CycleHistory: {
+      payload: Prisma.$CycleHistoryPayload<ExtArgs>
+      fields: Prisma.CycleHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CycleHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CycleHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.CycleHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CycleHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.CycleHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.CycleHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.CycleHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CycleHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.CycleHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload>
+        }
+        update: {
+          args: Prisma.CycleHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.CycleHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CycleHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CycleHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.CycleHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.CycleHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCycleHistory>
+        }
+        groupBy: {
+          args: Prisma.CycleHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CycleHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CycleHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CycleHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -540,6 +615,16 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const CycleHistoryScalarFieldEnum = {
+  id: 'id',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  userID: 'userID'
+} as const
+
+export type CycleHistoryScalarFieldEnum = (typeof CycleHistoryScalarFieldEnum)[keyof typeof CycleHistoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -771,6 +856,7 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  cycleHistory?: Prisma.CycleHistoryOmit
 }
 
 /* Types for Logging */

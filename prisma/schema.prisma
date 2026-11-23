@@ -20,6 +20,18 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  history CycleHistory[]
+
   @@map("users")
 }
 
+model CycleHistory {
+  id         Int      @id @default(autoincrement())
+  startedAt  DateTime @default(now())
+  finishedAt DateTime
+
+  userID Int
+  user   User @relation(fields: [userID], references: [id])
+
+  @@map("cycle_history")
+}

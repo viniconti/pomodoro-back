@@ -44,3 +44,8 @@ export { Prisma }
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model CycleHistory
+ * 
+ */
+export type CycleHistory = Prisma.CycleHistoryModel
