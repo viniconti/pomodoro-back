@@ -1,4 +1,9 @@
+import { IsDateString } from 'class-validator';
+
 export class CreateCycleDto {
-  startedAt: Date;
-  finishedAt: Date;
+  @IsDateString()
+  startedAt: string;
+
+  @IsDateString()
+  finishedAt: string;
 }

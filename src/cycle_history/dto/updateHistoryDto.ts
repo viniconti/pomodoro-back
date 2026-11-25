@@ -1,4 +1,11 @@
+import { IsDateString, IsOptional } from 'class-validator';
+
 export class UpdateHistoryDto {
-  startedat?: Date;
-  finishedAt?: Date;
+  @IsOptional()
+  @IsDateString()
+  startedAt?: string;
+
+  @IsOptional()
+  @IsDateString()
+  finishedAt?: string;
 }

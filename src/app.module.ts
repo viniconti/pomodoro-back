@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
-import { UsersController } from './users/users.controller';
-import { UsersService } from './users/users.service';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from './auth/auth.module';
 import { CycleHistoryModule } from './cycle_history/cycle_history.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, ConfigModule.forRoot({ isGlobal: true }), PrismaModule, CycleHistoryModule],
-  controllers: [UsersController],
-  providers: [UsersService],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    PrismaModule,
+    UsersModule,
+    AuthModule,
+    CycleHistoryModule,
+  ],
 })
 export class AppModule {}
